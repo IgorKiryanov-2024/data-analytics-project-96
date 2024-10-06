@@ -47,13 +47,9 @@ tab3 as (
         utm_campaign,
         date(visit_date) as visit_date,
         count(visitor_id) as visitors_count,
-        count(nullif(created_at, null)) as leads_count,
-        count(
-            case when status_id = 142 then visitor_id end
-        ) as purchases_count,
-        sum(
-            case when status_id = 142 then amount else 0 end
-        ) as revenue
+        count(created_at) as leads_count,
+        count(visitor_id) filter (where status_id = 142) as purchases_count,
+        sum(amount) filter (where status_id = 142) as revenue
     from
         tab2
     group by
