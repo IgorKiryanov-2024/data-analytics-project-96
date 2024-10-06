@@ -1,5 +1,5 @@
 with tab1 as (
-     select distinct on (visitor_id)
+    select distinct on (visitor_id)
         visitor_id,
         visit_date,
         source as utm_source,

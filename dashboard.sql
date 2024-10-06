@@ -122,16 +122,16 @@ tab5 as (
 )
 --Сколько у нас пользователей заходят на сайт?
 --Какие каналы их приводят на сайт?
---Сколько лидов к нам приходят?        
-select distinct 
+--Сколько лидов к нам приходят?
+select
     t5.utm_source,
     to_char(t5.visit_date, 'WW') as visit_week,
     sum(t5.visitors_count) as visitors_count,
     sum(t5.leads_count) as leads_count
 from
     tab5 as t5
-group by visit_week;
---Какая конверсия из клика в лид? А из лида в оплату?     
+group by t5.utm_source, visit_week;
+--Какая конверсия из клика в лид? А из лида в оплату?
 select
     t5.visit_date,
     t5.visitors_count,
