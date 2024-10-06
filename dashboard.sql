@@ -253,16 +253,18 @@ tab6 as (
     from
         tab5 as t5
     where t5.leads_count > 0 and t5.purchases_count > 0
-    group by t5.utm_source)
+    group by t5.utm_source
+)
+
 select
     utm_source,
     visitors_count,
     leads_count,
     purchases_count,
     round((leads_count::numeric / visitors_count::numeric) * 100.0, 2)
-as convers_click,
+    as convers_click,
     round((purchases_count::numeric / leads_count::numeric) * 100.0, 2)
-as convers_lead
+    as convers_lead
 from tab6;
 --cpu = total_cost / visitors_count
 --cpl = total_cost / leads_count
