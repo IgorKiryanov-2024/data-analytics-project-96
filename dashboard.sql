@@ -217,7 +217,7 @@ tab4 as (
         utm_campaign
 ),
 
- tab5 as (
+tab5 as (
     select
         t3.visit_date,
         t3.visitors_count,
@@ -233,9 +233,9 @@ tab4 as (
     left join tab4 as t4
         on
             t3.visit_date = t4.visit_date
-        and t3.utm_source = t4.utm_source
-        and t3.utm_medium = t4.utm_medium
-        and t3.utm_campaign = t4.utm_campaign
+            and t3.utm_source = t4.utm_source
+            and t3.utm_medium = t4.utm_medium
+            and t3.utm_campaign = t4.utm_campaign
     order by
         t3.revenue desc nulls last,
         t3.visit_date asc,
@@ -243,23 +243,26 @@ tab4 as (
         t3.utm_source asc,
         t3.utm_medium asc
 ),
+
 tab6 as (
-    select 
+    select
         t5.utm_source,
-        SUM(t5.visitors_count) as visitors_count,
-        SUM(t5.leads_count) as leads_count,
-        SUM(t5.purchases_count) as purchases_count
+        sum(t5.visitors_count) as visitors_count,
+        sum(t5.leads_count) as leads_count,
+        sum(t5.purchases_count) as purchases_count
     from
         tab5 as t5
     where t5.leads_count > 0 and t5.purchases_count > 0
     group by t5.utm_source)
-select       
+select
     utm_source,
     visitors_count,
     leads_count,
     purchases_count,
-    round((leads_count::numeric / visitors_count::numeric) * 100.0, 2) as convers_click,
-    round((purchases_count::numeric / leads_count::numeric) * 100.0, 2) as convers_lead
+    round((leads_count::numeric / visitors_count::numeric) * 100.0, 2)
+as convers_click,
+    round((purchases_count::numeric / leads_count::numeric) * 100.0, 2)
+as convers_lead
 from tab6;
 --cpu = total_cost / visitors_count
 --cpl = total_cost / leads_count
