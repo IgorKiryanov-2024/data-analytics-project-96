@@ -35,4 +35,3 @@ ORDER BY
     t.utm_medium ASC,
     t.utm_campaign ASC
 LIMIT 10;
-
