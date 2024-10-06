@@ -123,15 +123,16 @@ tab5 as (
 --Сколько у нас пользователей заходят на сайт?
 --Какие каналы их приводят на сайт?
 --Сколько лидов к нам приходят?        
-    select distinct t5.utm_source,
+select distinct 
+    t5.utm_source,
     to_char(t5.visit_date, 'WW') as visit_week,
     sum(t5.visitors_count) as visitors_count,
     sum(t5.leads_count) as leads_count
 from
     tab5 as t5
-group by t5.utm_source, visit_week;
+group by visit_week;
 --Какая конверсия из клика в лид? А из лида в оплату?     
-    select
+select
     t5.visit_date,
     t5.visitors_count,
     t5.utm_source,
@@ -151,7 +152,7 @@ where t5.leads_count > 0;
 --cppu = total_cost / purchases_count
 --roi = (revenue - total_cost) / total_cost * 100%
 select
-    coalesce(t5.utm_source),
+    coalesce(t5.utm_source) as utm_source,
     sum(t5.total_cost) as total_cost,
     sum(t5.leads_count) as leads_count,
     sum(t5.purchases_count) as purchases_count,

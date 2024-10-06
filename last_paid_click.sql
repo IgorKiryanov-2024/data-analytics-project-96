@@ -72,4 +72,4 @@ ORDER BY
     t.utm_source ASC,
     t.utm_medium ASC,
     t.utm_campaign ASC
-    LIMIT 10;
+LIMIT 10;

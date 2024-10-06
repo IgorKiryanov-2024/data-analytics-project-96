@@ -117,4 +117,4 @@ order by
     t3.visitors_count desc,
     t3.utm_source asc,
     t3.utm_medium asc
-    limit 15;
+limit 15;
