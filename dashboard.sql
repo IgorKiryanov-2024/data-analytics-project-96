@@ -18,7 +18,7 @@ with tab1 as (
 tab2 as (
     select
         t.visitor_id,
-        t.visit_date, 
+        t.visit_date,
         t.utm_source,
         t.utm_medium,
         t.utm_campaign,
@@ -94,7 +94,7 @@ tab4 as (
         utm_campaign
 ),
 
- tab5 as (
+tab5 as (
     select
         t3.visit_date,
         t3.visitors_count,
@@ -110,9 +110,9 @@ tab4 as (
     left join tab4 as t4
         on
             t3.visit_date = t4.visit_date
-        and t3.utm_source = t4.utm_source
-        and t3.utm_medium = t4.utm_medium
-        and t3.utm_campaign = t4.utm_campaign
+            and t3.utm_source = t4.utm_source
+            and t3.utm_medium = t4.utm_medium
+            and t3.utm_campaign = t4.utm_campaign
     order by
         t3.revenue desc nulls last,
         t3.visit_date asc,
@@ -123,8 +123,7 @@ tab4 as (
 --Сколько у нас пользователей заходят на сайт?
 --Какие каналы их приводят на сайт?
 --Сколько лидов к нам приходят?        
-select distinct
-    t5.utm_source,
+    select distinct t5.utm_source,
     to_char(t5.visit_date, 'WW') as visit_week,
     sum(t5.visitors_count) as visitors_count,
     sum(t5.leads_count) as leads_count

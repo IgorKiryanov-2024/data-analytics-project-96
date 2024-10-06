@@ -1,5 +1,5 @@
 with tab1 as (
-    select distinct on (visitor_id)
+     select distinct on (visitor_id)
         visitor_id,
         visit_date,
         source as utm_source,
@@ -117,4 +117,4 @@ order by
     t3.visitors_count desc,
     t3.utm_source asc,
     t3.utm_medium asc
-limit 15;
+    limit 15;
